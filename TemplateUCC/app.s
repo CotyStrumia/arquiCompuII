@@ -45,7 +45,7 @@ fondo:
 	mov w12, 0x20  //led verde
 	mov w13, 0x800  //led rojo
 	mov w14, 0x1    //led azul
-	mov w27, 0x111B1D //defino el color superior
+	mov w27, 0x111B //defino el color superior
 
 	pintar1:
 		sturh w27, [x10] //pinto x10
@@ -53,18 +53,20 @@ fondo:
 		add x10, x0, x10 //sumo al valor de la memoria la dirección base del framebuffer
 		sturh w27,[x10] // cargo el nuevo color a el pixel
 		add x15, x15, 2 // aumento el valor de x15 para medir el pixel
-		cmp x15, 263168 // valor del ultimo pixel segun formula del pdf
+		movz x7, 2631
+		cmp x15, x7 // valor del ultimo pixel segun formula del pdf
 		beq pintar1
 
 
-	mov w27, 0x0E321E //defino el color superior
+	mov w27, 0x0E32 //defino el color superior
 	pintar2:
 		sturh w27, [x10] //pinto x10
 		add x10, x10, x10 //multiplico el valor de x10 para trabajar en 16 bits
 		add x10, x0, x10 //sumo al valor de la memoria la dirección base del framebuffer
 		sturh w27,[x10] // cargo el nuevo color a el pixel
 		add x15, x15, 2 // aumento el valor de x15 para medir el pixel
-		cmp x15, 525824 //valor del ultimo pixel segun formula del pdf
+		movz x7, 5258
+		cmp x15, x7 //valor del ultimo pixel segun formula del pdf
 
 
 		
@@ -73,7 +75,7 @@ fondo:
 
 
 cabeza:
-	mov w27, 0x1B2B0F //defino el color a usar
+	mov w27, 0x1B2B //defino el color a usar
    arriba:
 	mov x3, 151 //inicio x
 	mov x4, 411 // fin x
